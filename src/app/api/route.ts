@@ -18,8 +18,13 @@ export async function GET(request: any) {
     const collections = await webflow.collections.list(process.env.SITE_ID);
     console.log(process.env.SITE_ID);
     console.log(collections);
+    return NextResponse.json(
+      { message: collections.collections?.length },
+      { status: 400 }
+    );
   } catch (e) {
     console.log(e);
+    return NextResponse.json({ message: e }, { status: 400 });
   }
 
   return NextResponse.json({ message: "Hello World" }, { status: 200 });
