@@ -5,10 +5,46 @@ import { useQuery } from "@tanstack/react-query";
 const fetchBooks = async () => {
   try {
     const res = await fetch("/api");
-    console.log(await res.json(), 'GUHIUHGCHVJKHGGYHUJIKOIKJUHGF');
-    return await res.json();
+    // return await res.json();
+
+
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: "Bearer " + process.env.API_TOKEN,
+      },
+    };
+
+    const data = await fetch(
+      `/api`
+    );
+
+    // console.log("a");
+    // console.log("a");
+    // console.log("a");
+    // console.log("a");
+    // console.log("a");
+    // console.log(data, "data hereee");
+    // // console.log(data.json());
+    // console.log("a");
+    // console.log("a");
+    // console.log("a");
+    // console.log("a");
+    // console.log("a");
+    // console.log("a");
+
+    // const collections = await webflow.collections.list(process.env.SITE_ID);
+    // console.log(process.env.SITE_ID);
+    // console.log(collections);
+    // return NextResponse.json(
+    //   { message: "collection:" + collections.collections?.length },
+    //   { status: 400 }
+    // );
+   return await data.json()
+
   } catch (error) {
-    throw e;
+    throw new Error ('Failed to get data')
   }
 };
 
@@ -25,13 +61,16 @@ export default function Page() {
   return (
     <div>
       <h1>Books</h1>
-      <ul>
-        {books.map((book) => (
+        <div>
+                {books.items.map((book:any) => (
           <li key={book.id}>
-            {book.title} by {book.author}
+            {book.fieldData.name} by {book.fieldData.author}
           </li>
         ))}
-      </ul>
+        </div>
+  
     </div>
   );
 }
+
+

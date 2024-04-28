@@ -1,5 +1,4 @@
 // app/api/route.js 👈🏽
-import { WebflowClient, Webflow } from "webflow-api";
 import { NextResponse } from "next/server";
 
 // REFER: https://stackoverflow.com/a/75418737
@@ -17,9 +16,6 @@ export async function GET(request: any) {
       { status: 400 }
     );
   }
-  const webflow = new WebflowClient({
-    accessToken: process.env.API_TOKEN ?? "",
-  });
 
   try {
     const options = {
@@ -31,46 +27,16 @@ export async function GET(request: any) {
     };
 
     const data = await fetch(
-      `https://api.webflow.com/v2/collections/COL_ID/items`,
+      `https://api.webflow.com/v2/collections/662b431bea4123556ea003ee/items`,
       options
     );
 
-    const jsonData = await data.json();
-    // console.log("a");
-    // console.log("a");
-    // console.log("a");
-    // console.log("a");
-    // console.log("a");
-    // console.log(data, "data hereee");
-    // // console.log(data.json());
-    // console.log("a");
-    // console.log("a");
-    // console.log("a");
-    // console.log("a");
-    // console.log("a");
-    // console.log("a");
-
-    // const collections = await webflow.collections.list(process.env.SITE_ID);
-    // console.log(process.env.SITE_ID);
-    // console.log(collections);
-    // return NextResponse.json(
-    //   { message: "collection:" + collections.collections?.length },
-    //   { status: 400 }
-    // );
    const parsedData = await data.json()
-   console.log(parsedData.items.map((a) => console.log(a)))
-    // console.log(await data.json().items.map());
-    // fetch(
-    //   "https://api.webflow.com/v2/collections/COL_ID/items",
-    //   options
-    // )
-    //   .then((response) => response.json())
-    //   .then((response) => console.log(response))
-    //   .catch((err) => console.error(err));
 
-    return NextResponse.json(jsonData, { status: 200 });
-  } catch (e) {
-    console.log("error here?", e);
+    return NextResponse.json(
+      parsedData,
+      { status: 400 }
+    );  } catch (e) {
     return NextResponse.json({ status: 500 });
   }
 }
