@@ -15,12 +15,7 @@ const fetchBooks = async () => {
 
 export default function Page() {
   //https://medium.com/@ecarina.gonzalez/react-query-integration-with-next-js-are-you-ready-7433568356f2
-  const {
-    data: books,
-    isLoading,
-    isError,
-    error,
-  } = useQuery({
+  const { data: books, isLoading, isError, error } = useQuery({
     queryFn: async () => await fetchBooks(),
     queryKey: ["books"],
   });
@@ -30,13 +25,12 @@ export default function Page() {
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error</div>;
-  console.log(bookName, bookAuthor);
 
   //create
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    await fetch("/api", {
+    const res = await fetch("/api", {
       method: "POST",
       headers: {
         accept: "application/json",
@@ -47,6 +41,9 @@ export default function Page() {
         bookAuthor: bookAuthor,
       }),
     });
+
+    const response = await res.json();
+    console.log(response);
   }
 
   return (
