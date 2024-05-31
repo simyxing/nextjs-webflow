@@ -26,8 +26,9 @@ export async function GET(request: any) {
       },
     };
 
+    // Get live items only
     const data = await fetch(
-      `https://api.webflow.com/v2/collections/662b431bea4123556ea003ee/items`,
+      `https://api.webflow.com/v2/collections/662b431bea4123556ea003ee/items/live`,
       options
     );
 
