@@ -59,18 +59,23 @@ export default function Page() {
       <br />
       <h1>Add Book</h1>
       <form onSubmit={onSubmit}>
+        <label>Book Name</label>&nbsp;
         <input
           type="text"
           name="name"
           value={bookName}
           onChange={(e) => setBookName(e.target.value)}
         />
+        <br />
+        <label>Author Name</label>&nbsp;
         <input
           type="text"
           name="author"
           value={bookAuthor}
           onChange={(e) => setBookAuthor(e.target.value)}
         />
+        <br />
+        <br />
         <button type="submit">Submit</button>
       </form>
     </div>
